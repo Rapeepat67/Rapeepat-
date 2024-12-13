@@ -1,81 +1,89 @@
 #include <Arduino.h>
-int sw1 = 15;
-#define ledg1 23
-#define ledy1 19
-#define ledr1 18
-#define ledg2 5
-#define ledy2 17
-#define ledr2 16
-int buttonState = 0;
-int k = 0;
-
-void setup()
-{
-  pinMode(sw1, INPUT_PULLUP);
-  pinMode(ledg1, OUTPUT);
-  pinMode(ledy1, OUTPUT);
-  pinMode(ledr1, OUTPUT);
-  pinMode(ledr2, OUTPUT);
-  pinMode(ledy2, OUTPUT);
-  pinMode(ledg2, OUTPUT);
-
-  digitalWrite(ledy1, LOW);
-  digitalWrite(ledr1, LOW);
-  digitalWrite(ledg1, LOW);
-  digitalWrite(ledy2, LOW);
-  digitalWrite(ledr2, LOW);
-  digitalWrite(ledg2, LOW);
+int LD1 = 23;
+int LD2 = 19;
+int LD3 = 18;
+int LD4 = 5;
+int LD5 = 17;
+int LD6 = 16;
+int LD7 = 4;
+int LD8 = 0;
+int potPin = 36;
+void setup(){
+    pinMode (LD1,OUTPUT);
+    pinMode (LD2,OUTPUT);
+    pinMode (LD3,OUTPUT);
+    pinMode (LD4,OUTPUT);
+    pinMode (LD5,OUTPUT);
+    pinMode (LD6,OUTPUT);
+    pinMode (LD7,OUTPUT);
+    pinMode (LD8,OUTPUT);
 }
+void loop() {
+    int potValue = analogRead(potPin); 
+    int lang = map(potValue, 0, 4095, 0, 4000); 
+   
+    digitalWrite(LD1, LOW);
+    digitalWrite(LD2, LOW);
+    digitalWrite(LD3, LOW);
+    digitalWrite(LD4, LOW);
+    digitalWrite(LD5, LOW);
+    digitalWrite(LD6, LOW);
+    digitalWrite(LD7, LOW);
+    digitalWrite(LD8, LOW);
 
-void loop()
-{
+    
+    if (lang >= 0 && lang < 500) {
+        digitalWrite(LD1, HIGH);
+    }
+    else if (lang >= 500 && lang < 1000) {
+        digitalWrite(LD1, HIGH);
+        digitalWrite(LD2, HIGH);
+    }
+    else if (lang >= 1000 && lang < 1500) {
+        digitalWrite(LD1, HIGH);
+        digitalWrite(LD2, HIGH);
+        digitalWrite(LD3, HIGH);
+    }
+    else if (lang >= 1500 && lang < 2000) {
+        digitalWrite(LD1, HIGH);
+        digitalWrite(LD2, HIGH);
+        digitalWrite(LD3, HIGH);
+        digitalWrite(LD4, HIGH);
+    }
+    else if (lang >= 2000 && lang < 2500) {
+        digitalWrite(LD1, HIGH);
+        digitalWrite(LD2, HIGH);
+        digitalWrite(LD3, HIGH);
+        digitalWrite(LD4, HIGH);
+        digitalWrite(LD5, HIGH);
+    }
+    else if (lang >= 2500 && lang < 3000) {
+        digitalWrite(LD1, HIGH);
+        digitalWrite(LD2, HIGH);
+        digitalWrite(LD3, HIGH);
+        digitalWrite(LD4, HIGH);
+        digitalWrite(LD5, HIGH);
+        digitalWrite(LD6, HIGH);
+    }
+    else if (lang >= 3000 && lang < 3500) {
+        digitalWrite(LD1, HIGH);
+        digitalWrite(LD2, HIGH);
+        digitalWrite(LD3, HIGH);
+        digitalWrite(LD4, HIGH);
+        digitalWrite(LD5, HIGH);
+        digitalWrite(LD6, HIGH);
+        digitalWrite(LD7, HIGH);
+    }
+    else if (lang >= 3500 && lang <= 4000) {
+        digitalWrite(LD1, HIGH);
+        digitalWrite(LD2, HIGH);
+        digitalWrite(LD3, HIGH);
+        digitalWrite(LD4, HIGH);
+        digitalWrite(LD5, HIGH);
+        digitalWrite(LD6, HIGH);
+        digitalWrite(LD7, HIGH);
+        digitalWrite(LD8, HIGH);
+    }
 
-  while (k == 1)
-  {
-    digitalWrite(ledy1, HIGH);
-    digitalWrite(ledr1, HIGH);
-    digitalWrite(ledg1, HIGH);
-    digitalWrite(ledy2, HIGH);
-    digitalWrite(ledr2, HIGH);
-    digitalWrite(ledg2, HIGH);
-    delay(1000);
-    digitalWrite(ledy1, LOW);
-    digitalWrite(ledr1, LOW);
-    digitalWrite(ledg1, LOW);
-    digitalWrite(ledy2, LOW);
-    digitalWrite(ledr2, LOW);
-    digitalWrite(ledg2, LOW);
-    delay(1000);
-    while (digitalRead(sw1) == HIGH)
-      k = 0;
-  }
-
-  while (k == 0)
-  {
-    digitalWrite(ledg1, HIGH);
-    digitalWrite(ledr2, HIGH);
-    delay(1000);
-    digitalWrite(ledg1, LOW);
-    digitalWrite(ledy1, HIGH);
-    delay(1000);
-    digitalWrite(ledr2, LOW);
-    digitalWrite(ledg2, HIGH);
-    digitalWrite(ledy1, LOW);
-    digitalWrite(ledr1, HIGH);
-    delay(1000);
-    digitalWrite(ledg2, LOW);
-    digitalWrite(ledy2, HIGH);
-    delay(1000);
-    digitalWrite(ledr1, LOW);
-    digitalWrite(ledg1, HIGH);
-    digitalWrite(ledy2, LOW);
-    digitalWrite(ledr2, HIGH);
-    delay(1000);
-    while (digitalRead(sw1) == HIGH)
-      k = 1;
-  }
-}
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+    delay(10); 
 }

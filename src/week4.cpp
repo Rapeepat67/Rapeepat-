@@ -1,3 +1,4 @@
+/*
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
 
@@ -17,9 +18,7 @@ int sw1 = 15; // สวิตช์เลือกเมนู
 int menu = 0; // เก็บสถานะของเมนูที่เลือก
 LiquidCrystal_I2C lcd(0x27, 20, 4); // ตั้งค่า LCD
 
-unsigned long lastSwitchTime = 0;  // เวลาในการบันทึกการกดสวิตช์
-const long debounceDelay = 2000;    // ดีเลย์ป้องกันการกดซ้ำ (2000ms)
-
+// ฟังก์ชันสำหรับควบคุม LED
 void allLedsOn() {
   digitalWrite(led1, HIGH);
   digitalWrite(led2, HIGH);
@@ -40,7 +39,6 @@ void allLedsOff() {
   digitalWrite(led6, LOW);
   digitalWrite(led7, LOW);
   digitalWrite(led8, LOW);
-  delay(500);
 }
 
 void alternateBlink() {
@@ -75,22 +73,24 @@ void pairedBlink() {
   currentPair += 2;
   if (currentPair >= 8) currentPair = 0;
   delay(500);
+
 }
 
 void runningLight() {
-  int leds[] = {led1, led2, led3, led4, led5, led6, led7, led8};
+  int leds[] = {led1, led2, led3, led4, led5, led6, led7, led8}; // เก็บลำดับพินของ LED
 
+  // สว่างเรียงลำดับจากหลอดแรกถึงหลอดสุดท้าย
   for (int i = 0; i < 8; i++) {
-    digitalWrite(leds[i], HIGH);
-    delay(200);
+    digitalWrite(leds[i], HIGH);  // เปิดไฟ LED
+    delay(200);                  // รอเวลา 200 ms ต่อหลอด
   }
 
+  // ดับเรียงลำดับกลับทีละหลอด
   for (int i = 7; i >= 0; i--) {
-    digitalWrite(leds[i], LOW);
-    delay(200);
+    digitalWrite(leds[i], LOW);   // ปิดไฟ LED
+    delay(200);                   // รอเวลา 200 ms ต่อหลอด
   }
 }
-
 void allBlinkTogether() {
   static bool state = false;
   state = !state;
@@ -110,7 +110,7 @@ void setup() {
   lcd.backlight();
   lcd.setCursor(0, 0);
   lcd.print("LED Control Menu");
-
+  
   pinMode(sw1, INPUT_PULLUP);
   pinMode(led1, OUTPUT);
   pinMode(led2, OUTPUT);
@@ -123,7 +123,7 @@ void setup() {
 }
 
 void loop() {
-  if (digitalRead(sw1) == HIGH) {
+  if (digitalRead(sw1) == LOW) {
     menu++;
     if (menu > 6) menu = 1;
     lcd.clear();
@@ -131,7 +131,7 @@ void loop() {
     lcd.print("Selected Menu: ");
     lcd.setCursor(0, 1);
     lcd.print(menu);
-    lastSwitchTime = millis();
+    delay(300);
   }
 
   switch (menu) {
@@ -158,3 +158,4 @@ void loop() {
       break;
   }
 }
+*/
